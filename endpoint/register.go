@@ -17,18 +17,18 @@ func Register(c echo.Context) error {
 		name := c.FormValue("name")
 		password := c.FormValue("password")
 		email := c.FormValue("email")
-		bcryptPass, _ := bcrypt.GenerateFromPassword([]byte(password), Hash_cost)
+		bcryptPass, _ := bcrypt.GenerateFromPassword([]byte(password), HashCost)
 
 		db := database.ConnectDB()
 
 		_, err := db.Query("INSERT INTO user (name,email,password) VALUES (?,?,?)", name, email, bcryptPass)
 
-		response.Status = Status_nok
+		response.Status = StatusNok
 		response.Message = "Registration has not been possible"
 
 		if err != nil {
-			response.Status = Status_ok
-			response.Message = Message_success
+			response.Status = StatusOk
+			response.Message = MessageSuccess
 		}
 
 		return c.JSON(http.StatusOK, response)
@@ -36,11 +36,11 @@ func Register(c echo.Context) error {
 
 	var emptySlice []generic.Type
 
-	response.Status = Status_nok
+	response.Status = StatusNok
 	response.Response = emptySlice
 	response.Message = "You are already registered"
 
-	return c.JSON(http.StatusOK, &response)
+	return c.JSON(http.StatusOK, response)
 }
 
 func verify(email string) bool {

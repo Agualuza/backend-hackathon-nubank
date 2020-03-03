@@ -12,11 +12,11 @@ func Login(c echo.Context) error {
 	currentUser, exists := getCurrentUser(c.FormValue("email"),c.FormValue("password"))
 
 	message := "User/Password invalid"
-	status := Status_nok
+	status := StatusNok
 
 	if exists {
-		message = Message_success
-		status = Status_ok
+		message = MessageSuccess
+		status = StatusOk
 	}
 
 	var response jsonReponse

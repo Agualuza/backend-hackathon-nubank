@@ -1,8 +1,9 @@
 package endpoint
 
-const Hash_cost = 10
-const Status_nok = "NOK"
-const Status_ok = "OK"
-const Message_success = "Success"
+const HashCost = 10
+const StatusNok = "NOK"
+const StatusOk = "OK"
+const MessageSuccess = "Success"
+const SafeBuyVariablePercentage = 0.7 //30% is fixed part
 
 

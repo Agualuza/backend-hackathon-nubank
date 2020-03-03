@@ -28,5 +28,9 @@ func main() {
 
 	//Register
 	e.GET("/register", endpoint.Register)
+
+	//SafeBuy
+	e.GET("/safebuy", endpoint.SafeBuy)
+
 	e.Logger.Fatal(e.Start(configuration.Server.Port))
 }
