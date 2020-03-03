@@ -10,7 +10,7 @@ import (
 
 func Login(c echo.Context) error {
 	if len(c.FormValue("token")) > 0 {
-		currentUser := verifyToken(c.FormValue("token"))
+		currentUser := getUserByToken(c.FormValue("token"))
 		var response jsonReponse
 		response.Status = StatusOk
 		response.Response = append(response.Response, currentUser)
@@ -75,7 +75,7 @@ func getCurrentUser(e, p string) (model.User, bool) {
 	return currentUser, false
 }
 
-func verifyToken(t string) model.User {
+func getUserByToken(t string) model.User {
 	db := database.ConnectDB()
 	currentUser := model.User{}
 	var count, id int
