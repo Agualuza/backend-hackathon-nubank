@@ -32,5 +32,8 @@ func main() {
 	//SafeBuy
 	e.GET("/safebuy", endpoint.SafeBuy)
 
+	//MakeTransaction
+	e.GET("/maketransaction", endpoint.MakeTransaction)
+
 	e.Logger.Fatal(e.Start(configuration.Server.Port))
 }
