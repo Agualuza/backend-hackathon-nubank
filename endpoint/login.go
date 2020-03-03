@@ -9,7 +9,22 @@ import (
 )
 
 func Login(c echo.Context) error {
-	currentUser, exists := getCurrentUser(c.FormValue("email"),c.FormValue("password"))
+	if len(c.FormValue("token")) > 0 {
+		currentUser := verifyToken(c.FormValue("token"))
+		var response jsonReponse
+		response.Status = StatusOk
+		response.Response = append(response.Response, currentUser)
+		response.Message = MessageSuccess
+
+		if currentUser.Id == 0 {
+			response.Status = StatusNok
+			response.Message = "Token invalid"
+		}
+
+		return c.JSON(http.StatusOK, response)
+	}
+
+	currentUser, exists := getCurrentUser(c.FormValue("email"), c.FormValue("password"))
 
 	message := "User/Password invalid"
 	status := StatusNok
@@ -36,26 +51,46 @@ func getCurrentUser(e, p string) (model.User, bool) {
 
 	defer rows.Close()
 
-	var count,id int
-	var name,email,password string
+	var count, id int
+	var name, email, password string
 
 	for rows.Next() {
-		if err := rows.Scan(&count,&id,&name,&email,&password); err != nil {
-			return currentUser,false
+		if err := rows.Scan(&count, &id, &name, &email, &password); err != nil {
+			return currentUser, false
 		}
 	}
 
-	if count > 0 && bcrypt.CompareHashAndPassword([]byte(password),[]byte(p)) == nil {
+	if count > 0 && bcrypt.CompareHashAndPassword([]byte(password), []byte(p)) == nil {
 		currentUser.Id = id
 		currentUser.Name = name
 		currentUser.Password = "******"
 		currentUser.Email = email
 		var token string
 		_, _ = db.Query("UPDATE user SET token = MD5((RAND()+RAND()+RAND()+RAND())*NOW())")
-		_ = db.QueryRow("SELECT token FROM user WHERE id = ?",currentUser.Id).Scan(&token)
+		_ = db.QueryRow("SELECT token FROM user WHERE id = ?", currentUser.Id).Scan(&token)
 		currentUser.Token = token
-		return currentUser,true
+		return currentUser, true
 	}
 
-	return currentUser,false
+	return currentUser, false
+}
+
+func verifyToken(t string) model.User {
+	db := database.ConnectDB()
+	currentUser := model.User{}
+	var count, id int
+	var name, email, password, token string
+
+	 _ = db.QueryRow("SELECT count(1),id, name, email,password,token FROM user WHERE token = ?", t).Scan(&count, &id, &name, &email, &password, &token)
+
+	if count > 0 {
+		currentUser.Email = email
+		currentUser.Id = id
+		currentUser.Password = "******"
+		currentUser.Name = name
+		currentUser.Token = token
+	}
+
+	return currentUser
+
 }

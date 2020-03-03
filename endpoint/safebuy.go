@@ -27,7 +27,7 @@ func SafeBuy(c echo.Context) error {
 
 	var response RiskEvaluate
 	response.Profile = p
-	response.Rate = math.Min(rate,1)
+	response.Rate = 1 - math.Min(rate,1)
 
 	return c.JSON(http.StatusOK, response)
 
