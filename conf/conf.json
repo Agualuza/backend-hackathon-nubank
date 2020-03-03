@@ -1,0 +1,9 @@
+{
+  "DB": {
+    "Driver" : "mysql",
+    "ConnQuery" : "root:@/bank"
+  },
+  "Server" : {
+    "Port" : ":8000"
+  }
+}
