@@ -4,6 +4,6 @@
     "ConnQuery" : "root:@/bank"
   },
   "Server" : {
-    "Port" : ":80"
+    "Port" : ":8000"
   }
 }
