@@ -13,6 +13,12 @@
 			"revisionTime": "2019-06-11T08:46:15Z"
 		},
 		{
+			"checksumSHA1": "PYXuf7wvcj492uWhjvmXlyyQUYc=",
+			"path": "github.com/cheekybits/genny/generic",
+			"revision": "df3d48aa411e8e28498e452e42cc1e40498a9e58",
+			"revisionTime": "2019-06-11T08:46:15Z"
+		},
+		{
 			"checksumSHA1": "CSPbwbyzqA6sfORicn4HFtIhF/c=",
 			"path": "github.com/davecgh/go-spew/spew",
 			"revision": "d8f796af33cc11cb798c1aaeb27a4ebc5099927d",
@@ -129,6 +135,18 @@
 		{
 			"checksumSHA1": "aDAIGbVOJXGY6JQPvi+6jPFhejk=",
 			"path": "golang.org/x/crypto/acme/autocert",
+			"revision": "78000ba7a073cafc0278790f6bce552a0f25850e",
+			"revisionTime": "2020-03-02T20:51:17Z"
+		},
+		{
+			"checksumSHA1": "oCH3J96RWvO8W4xjix47PModpio=",
+			"path": "golang.org/x/crypto/bcrypt",
+			"revision": "78000ba7a073cafc0278790f6bce552a0f25850e",
+			"revisionTime": "2020-03-02T20:51:17Z"
+		},
+		{
+			"checksumSHA1": "q+XI9g44wd9mYvf3S5Wo8YZjAus=",
+			"path": "golang.org/x/crypto/blowfish",
 			"revision": "78000ba7a073cafc0278790f6bce552a0f25850e",
 			"revisionTime": "2020-03-02T20:51:17Z"
 		},
