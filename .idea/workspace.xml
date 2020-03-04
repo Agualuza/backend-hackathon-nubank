@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d74c80f5-97be-4ad7-9e78-66ed7ad40803" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/endpoint/maketransaction.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/transaction.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/endpoint/login.go" beforeDir="false" afterPath="$PROJECT_DIR$/endpoint/login.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/endpoint/safebuy.go" beforeDir="false" afterPath="$PROJECT_DIR$/endpoint/safebuy.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conf/conf.json" beforeDir="false" afterPath="$PROJECT_DIR$/conf/conf.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,10 +33,13 @@
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="configurable.Global.GOPATH.is.expanded" value="true" />
+    <property name="configurable.Module.GOPATH.is.expanded" value="false" />
+    <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$" />
-    <property name="settings.editor.selected.configurable" value="goland.project.structure" />
+    <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -66,10 +66,10 @@
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state x="443" y="247" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.829@0.23.1440.829" timestamp="1583177961663" />
-    <state x="218" y="76" key="SettingsEditor" timestamp="1583177376760">
+    <state x="218" y="76" key="SettingsEditor" timestamp="1583267818981">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
-    <state x="218" y="76" key="SettingsEditor/0.23.1440.829@0.23.1440.829" timestamp="1583177376760" />
+    <state x="218" y="76" key="SettingsEditor/0.23.1440.829@0.23.1440.829" timestamp="1583267818981" />
     <state x="493" y="52" key="refactoring.ChangeSignatureDialog" timestamp="1583263655158">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
