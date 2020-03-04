@@ -4,6 +4,7 @@ import (
 	"bank/conf"
 	"bank/endpoint"
 	"github.com/tkanos/gonfig"
+	"os"
 
 	//"bank/database"
 	"github.com/labstack/echo"
@@ -35,5 +36,5 @@ func main() {
 	//MakeTransaction
 	e.GET("/maketransaction", endpoint.MakeTransaction)
 
-	e.Logger.Fatal(e.Start(configuration.Server.Port))
+	e.Logger.Fatal(e.Start(os.Getenv("ConfigPort")))
 }
