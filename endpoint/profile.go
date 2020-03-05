@@ -1,8 +1,8 @@
 package endpoint
 
 type Profile struct {
-	Id   int
-	Payment float64
+	Id   int `json:"id"`
+	Payment float64 `json:"payment"`
 }
 
 type RiskEvaluate struct {
