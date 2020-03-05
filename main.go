@@ -36,5 +36,5 @@ func main() {
 	//MakeTransaction
 	e.GET("/maketransaction", endpoint.MakeTransaction)
 
-	e.Logger.Fatal(e.Start(os.Getenv("PORT")))
+	e.Logger.Fatal(e.Start(":" + os.Getenv("PORT")))
 }
