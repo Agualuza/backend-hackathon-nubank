@@ -17,7 +17,7 @@ func ConnectDB() *sql.DB {
 		panic(err)
 	}
 
-	db, err := sql.Open(configuration.DB.Driver, os.Getenv("DBConnQuerry"))
+	db, err := sql.Open(configuration.DB.Driver, os.Getenv("DBConnQuery"))
 
 	return db
 
