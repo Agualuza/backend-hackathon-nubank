@@ -47,15 +47,16 @@ func getCurrentUser(e, p string) (model.User, bool) {
 	db := database.ConnectDB()
 	currentUser := model.User{}
 
-	rows, _ := db.Query("SELECT count(1),id, name, email,password FROM user WHERE email = ?", e)
+	rows, _ := db.Query("SELECT count(1),id, name, email,password,balance FROM user WHERE email = ?", e)
 
 	defer rows.Close()
 
 	var count, id int
 	var name, email, password string
+	var balance float64
 
 	for rows.Next() {
-		if err := rows.Scan(&count, &id, &name, &email, &password); err != nil {
+		if err := rows.Scan(&count, &id, &name, &email, &password, &balance); err != nil {
 			return currentUser, false
 		}
 	}
@@ -65,6 +66,7 @@ func getCurrentUser(e, p string) (model.User, bool) {
 		currentUser.Name = name
 		currentUser.Password = "******"
 		currentUser.Email = email
+		currentUser.Balance = balance
 		var token string
 		_, _ = db.Query("UPDATE user SET token = MD5((RAND()+RAND()+RAND()+RAND())*NOW())")
 		_ = db.QueryRow("SELECT token FROM user WHERE id = ?", currentUser.Id).Scan(&token)
@@ -80,14 +82,16 @@ func getUserByToken(t string) model.User {
 	currentUser := model.User{}
 	var count, id int
 	var name, email, password, token string
+	var balance float64
 
-	 _ = db.QueryRow("SELECT count(1),id, name, email,password,token FROM user WHERE token = ?", t).Scan(&count, &id, &name, &email, &password, &token)
+	 _ = db.QueryRow("SELECT count(1),id, name, email,password,token,balance FROM user WHERE token = ?", t).Scan(&count, &id, &name, &email, &password, &token,&balance)
 
 	if count > 0 {
 		currentUser.Email = email
 		currentUser.Id = id
 		currentUser.Password = "******"
 		currentUser.Name = name
+		currentUser.Balance = balance
 		currentUser.Token = token
 	}
 
