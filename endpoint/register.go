@@ -26,7 +26,7 @@ func Register(c echo.Context) error {
 		response.Status = StatusNok
 		response.Message = "Registration has not been possible"
 
-		if err != nil {
+		if err == nil {
 			response.Status = StatusOk
 			response.Message = MessageSuccess
 		}
