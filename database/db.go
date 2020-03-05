@@ -6,6 +6,7 @@ import (
 	_ "database/sql"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/tkanos/gonfig"
+	"os"
 )
 
 func ConnectDB() *sql.DB {
@@ -16,7 +17,7 @@ func ConnectDB() *sql.DB {
 		panic(err)
 	}
 
-	db, err := sql.Open(configuration.DB.Driver, configuration.DB.ConnQuery)
+	db, err := sql.Open(configuration.DB.Driver, os.Getenv("DBConnQuerry"))
 
 	return db
 
