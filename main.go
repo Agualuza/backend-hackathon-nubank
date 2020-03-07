@@ -36,5 +36,9 @@ func main() {
 	//MakeTransaction
 	e.GET("/maketransaction", endpoint.MakeTransaction)
 
-	e.Logger.Fatal(e.Start(":" + os.Getenv("PORT")))
+	//Persona
+	e.GET("/persona", endpoint.Persona)
+
+	//Balance
+	e.GET("/balance", endpoint.Balance)
 }
