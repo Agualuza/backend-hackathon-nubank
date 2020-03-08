@@ -6,7 +6,6 @@ import (
 	"github.com/tkanos/gonfig"
 	"os"
 
-	//"bank/database"
 	"github.com/labstack/echo"
 )
 
@@ -29,9 +28,6 @@ func main() {
 
 	//Register
 	e.GET("/register", endpoint.Register)
-
-	//SafeBuy
-	e.GET("/safebuy", endpoint.SafeBuy)
 
 	//MakeTransaction
 	e.GET("/maketransaction", endpoint.MakeTransaction)
