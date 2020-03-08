@@ -3,10 +3,10 @@ package main
 import (
 	"bank/conf"
 	"bank/endpoint"
-	"github.com/tkanos/gonfig"
 	"os"
 
-	//"bank/database"
+	"github.com/tkanos/gonfig"
+
 	"github.com/labstack/echo"
 )
 
