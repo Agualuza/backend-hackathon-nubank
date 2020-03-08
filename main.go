@@ -36,5 +36,17 @@ func main() {
 	//MakeTransaction
 	e.GET("/maketransaction", endpoint.MakeTransaction)
 
+	//Persona
+	e.GET("/persona", endpoint.Persona)
+
+	//Balance
+	e.GET("/balance", endpoint.Balance)
+
+	//LoadPersonas
+	e.GET("/loadpersonas", endpoint.LoadPersonas)
+
+	//LoadCategories
+	e.GET("/loadcategories", endpoint.LoadCategories)
+
 	e.Logger.Fatal(e.Start(":" + os.Getenv("PORT")))
 }
