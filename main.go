@@ -30,11 +30,22 @@ func main() {
 	//Register
 	e.GET("/register", endpoint.Register)
 
-	//SafeBuy
-	e.GET("/safebuy", endpoint.SafeBuy)
-
 	//MakeTransaction
 	e.GET("/maketransaction", endpoint.MakeTransaction)
+
+	e.GET("/persona", endpoint.Persona)
+
+	//Balance
+	e.GET("/balance", endpoint.Balance)
+
+	//LoadPersonas
+	e.GET("/loadpersonas", endpoint.LoadPersonas)
+
+	//LoadCategories
+	e.GET("/loadcategories", endpoint.LoadCategories)
+
+	//SafeBuy
+	e.GET("/safebuy", endpoint.SafeBuy)
 
 	e.Logger.Fatal(e.Start(":" + os.Getenv("PORT")))
 }

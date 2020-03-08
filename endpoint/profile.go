@@ -1,11 +1,17 @@
 package endpoint
 
-type Profile struct {
-	Id   int `json:"id"`
-	Payment float64 `json:"payment"`
+import "bank/model"
+
+type Product struct {
+	Category model.Category `json:"category"`
+	Price    float64        `json:"price"`
+}
+
+type Evaluation struct {
+	Evaluation  string `json:"evaluation"`
+	Description string `json:"description"`
 }
 
 type RiskEvaluate struct {
-	Rate float64 `json:"rate"`
-	Profile Profile `json:"user_profile"`
+	Evaluation Evaluation `json:"evaluation"`
 }
