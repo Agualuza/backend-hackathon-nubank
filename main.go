@@ -41,4 +41,10 @@ func main() {
 
 	//Balance
 	e.GET("/balance", endpoint.Balance)
+
+	//LoadPersonas
+	e.GET("/loadpersonas", endpoint.LoadPersonas)
+
+	//LoadCategories
+	e.GET("/loadcategories", endpoint.LoadCategories)
 }
