@@ -47,4 +47,6 @@ func main() {
 
 	//LoadCategories
 	e.GET("/loadcategories", endpoint.LoadCategories)
+
+	e.Logger.Fatal(e.Start(":" + os.Getenv("PORT")))
 }
