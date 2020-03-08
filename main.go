@@ -5,9 +5,8 @@ import (
 	"bank/endpoint"
 	"os"
 
-	"github.com/tkanos/gonfig"
-
 	"github.com/labstack/echo"
+	"github.com/tkanos/gonfig"
 )
 
 var configuration = conf.Configuration{}
@@ -33,6 +32,7 @@ func main() {
 	//MakeTransaction
 	e.GET("/maketransaction", endpoint.MakeTransaction)
 
+	//Persona
 	e.GET("/persona", endpoint.Persona)
 
 	//Balance
