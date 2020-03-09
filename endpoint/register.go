@@ -31,6 +31,7 @@ func Register(c echo.Context) error {
 			response.Message = MessageSuccess
 		}
 
+		defer db.Close()
 		return c.JSON(http.StatusOK, response)
 	}
 
@@ -63,5 +64,6 @@ func verify(email string) bool {
 		return false
 	}
 
+	defer db.Close()
 	return true
 }

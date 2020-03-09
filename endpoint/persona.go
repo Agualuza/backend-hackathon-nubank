@@ -38,12 +38,14 @@ func Persona(c echo.Context) error {
 	response.Status = StatusOk
 	response.Response = append(response.Response, persona)
 
+	defer db.Close()
 	return c.JSON(http.StatusOK, response)
 }
 
 func savePersonaHistoric(uid,pid int ,q1,q2,q3,q4,q5 string) {
 	db := database.ConnectDB()
 	_ , _ = db.Query("INSERT INTO answer (user_id,persona_id,q1,q2,q3,q4,q5) VALUES (?,?,?,?,?,?,?)",uid,pid,q1,q2,q3,q4,q5)
+	defer db.Close()
 }
 
 func returnEstimatedPersona(q1,q2,q4,q5 string) model.Persona {
@@ -67,15 +69,18 @@ func returnEstimatedPersona(q1,q2,q4,q5 string) model.Persona {
 	}
 
 	var name,description,goal,photo string
+	var factor float64
 
-	_ = db.QueryRow("SELECT name,description,goal,photo from  persona where id = ?",pid).Scan(&name,&description,&goal,&photo)
+	_ = db.QueryRow("SELECT name,description,goal,factor,photo from  persona where id = ?",pid).Scan(&name,&description,&goal,&factor,&photo)
 
 	p.Id = pid
 	p.Photo = photo
 	p.Goal = goal
 	p.Name = name
 	p.Description = description
+	p.Factor = factor
 
+	defer db.Close()
 	return p
 
 

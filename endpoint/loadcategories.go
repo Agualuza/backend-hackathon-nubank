@@ -34,6 +34,7 @@ func getAllCategories() []model.Category{
 		list = append(list,c)
 	}
 
+	defer db.Close()
 	return list
 }
 

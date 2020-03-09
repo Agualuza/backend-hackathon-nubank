@@ -3,10 +3,10 @@ package main
 import (
 	"bank/conf"
 	"bank/endpoint"
-	"github.com/tkanos/gonfig"
 	"os"
 
 	"github.com/labstack/echo"
+	"github.com/tkanos/gonfig"
 )
 
 var configuration = conf.Configuration{}
@@ -43,6 +43,9 @@ func main() {
 
 	//LoadCategories
 	e.GET("/loadcategories", endpoint.LoadCategories)
+
+	//SafeBuy
+	e.GET("/safebuy", endpoint.SafeBuy)
 
 	e.Logger.Fatal(e.Start(":" + os.Getenv("PORT")))
 }

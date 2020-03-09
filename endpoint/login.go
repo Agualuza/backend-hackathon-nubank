@@ -74,6 +74,7 @@ func getCurrentUser(e, p string) (model.User, bool) {
 		return currentUser, true
 	}
 
+	defer db.Close()
 	return currentUser, false
 }
 
