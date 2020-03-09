@@ -48,4 +48,6 @@ func main() {
 	e.GET("/safebuy", endpoint.SafeBuy)
 
 	e.Logger.Fatal(e.Start(":" + os.Getenv("PORT")))
+	//LoadQuestions
+	e.GET("/loadquestions", endpoint.LoadQuestions)
 }
