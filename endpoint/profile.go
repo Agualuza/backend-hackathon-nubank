@@ -14,4 +14,5 @@ type Evaluation struct {
 
 type RiskEvaluate struct {
 	Evaluation Evaluation `json:"evaluation"`
+	Blog model.Blog `json:"blog"`
 }

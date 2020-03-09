@@ -6,6 +6,7 @@ import (
 	"github.com/labstack/echo"
 	"net/http"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -45,12 +46,15 @@ func SafeBuy(c echo.Context) error {
 
 	evaluation := analyze(persona,category,currentUser, productPrice)
 
+	blog := getBlogPost(persona.Id,evaluation.Evaluation)
+
 	var response jsonReponse
 	var riskEvaluate RiskEvaluate
 	riskEvaluate.Evaluation = evaluation
+	riskEvaluate.Blog = blog
 	response.Status = StatusOk
 	response.Message = MessageSuccess
-	response.Response = append(response.Response,evaluation)
+	response.Response = append(response.Response,riskEvaluate)
 	return c.JSON(http.StatusOK, response)
 
 }
@@ -132,6 +136,7 @@ func getPayment(user model.User) float64 {
 		"and YEAR(created_at) = ? and `type` = 'C' and user_id = ?) - (SELECT SUM(amount) FROM `transaction` "+
 		"WHERE MONTH(created_at) = ? and YEAR(created_at) = ? and `type` = 'D' and user_id = ?))", month, year, user.Id, month, year, user.Id).Scan(&p)
 
+	defer db.Close()
 	return p
 }
 
@@ -158,6 +163,8 @@ func saveAnalytics(u model.User,price,payment float64, response string) {
 	db := database.ConnectDB()
 	_, err := db.Query("INSERT INTO risk_analytic (user_id,payment,product_price,response) VALUES(?,?,?,?)", u.Id, payment, price, response)
 
+	defer db.Close()
+
 	if err != nil {
 		return
 	}
@@ -169,6 +176,7 @@ func getPersona(pid string) model.Persona {
 
 	_ = db.QueryRow("SELECT id,name,description,goal,factor,photo FROM persona WHERE id = ?", pid).Scan(&p.Id, &p.Name, &p.Description, &p.Goal, &p.Factor,&p.Photo)
 
+	defer db.Close()
 	return p
 }
 
@@ -178,5 +186,30 @@ func getCategory(cid string) model.Category {
 
 	_ = db.QueryRow("SELECT id,name,type FROM category WHERE id = ?", cid).Scan(&c.Id, &c.Name, &c.Type)
 
+	defer db.Close()
 	return c
+}
+
+func getBlogPost(pid int,r string) model.Blog {
+	db := database.ConnectDB()
+	var b model.Blog
+	var t time.Time
+	runes := []rune(r)
+
+	_ = db.QueryRow("SELECT b.id,b.title,b.post,b.author,b.created_at FROM blog b " +
+		"INNER JOIN response_blog rb ON rb.blog_id = b.id " +
+		"WHERE rb.persona_id = ? AND rb.response = ?",pid,string(runes[0])).Scan(&b.Id,&b.Title,&b.Post,&b.Author,&t)
+
+	sDate := strings.Split(t.String(),"-")
+	sDay := strings.Split(sDate[2]," ")
+	day := sDay[0]
+	month := sDate[1]
+	year := sDate[0]
+
+	date := day + "/" + month + "/" + year
+
+	b.CreatedAt = date
+
+	defer db.Close()
+	return b
 }

@@ -25,5 +25,6 @@ func MakeTransaction(c echo.Context) error {
 		response.Message = "An error has occurred. Transaction not completed. Try again later"
 	}
 
+	defer db.Close()
 	return c.JSON(http.StatusOK, response)
 }

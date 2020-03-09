@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4ed9429c-ce9e-440e-b8c5-3b39c02f3c5e" name="Default Changelist" comment="" />
+    <list default="true" id="4ed9429c-ce9e-440e-b8c5-3b39c02f3c5e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/model/blog.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conf/conf.json" beforeDir="false" afterPath="$PROJECT_DIR$/conf/conf.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/database/db.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/endpoint/const.go" beforeDir="false" afterPath="$PROJECT_DIR$/endpoint/const.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/endpoint/loadcategories.go" beforeDir="false" afterPath="$PROJECT_DIR$/endpoint/loadcategories.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/endpoint/loadpersonas.go" beforeDir="false" afterPath="$PROJECT_DIR$/endpoint/loadpersonas.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/endpoint/login.go" beforeDir="false" afterPath="$PROJECT_DIR$/endpoint/login.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/endpoint/maketransaction.go" beforeDir="false" afterPath="$PROJECT_DIR$/endpoint/maketransaction.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/endpoint/persona.go" beforeDir="false" afterPath="$PROJECT_DIR$/endpoint/persona.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/endpoint/profile.go" beforeDir="false" afterPath="$PROJECT_DIR$/endpoint/profile.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/endpoint/register.go" beforeDir="false" afterPath="$PROJECT_DIR$/endpoint/register.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/endpoint/safebuy.go" beforeDir="false" afterPath="$PROJECT_DIR$/endpoint/safebuy.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,9 +85,10 @@
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state x="493" y="52" key="refactoring.ChangeSignatureDialog/0.23.1440.829@0.23.1440.829" timestamp="1583263655155" />
-    <state x="396" y="176" key="search.everywhere.popup" timestamp="1583210369560">
-      <screen x="0" y="23" width="1440" height="829" />
+    <state x="396" y="177" width="670" height="676" key="search.everywhere.popup" timestamp="1583711714717">
+      <screen x="0" y="23" width="1440" height="832" />
     </state>
     <state x="396" y="176" key="search.everywhere.popup/0.23.1440.829@0.23.1440.829" timestamp="1583210369560" />
+    <state x="396" y="177" width="670" height="676" key="search.everywhere.popup/0.23.1440.832@0.23.1440.832" timestamp="1583711714717" />
   </component>
 </project>
