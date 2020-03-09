@@ -19,6 +19,7 @@
 
 <div class="method"><a name="loginGet"></a>
 
+### Login
 <div class="method-path"><a name="loginGet"></a>
 
     get /login
@@ -55,6 +56,7 @@
 
 <div class="method"><a name="maketransactionGet"></a>
 
+### Make Transaction
 <div class="method-path"><a name="maketransactionGet"></a>
 
     get /maketransaction
@@ -93,6 +95,7 @@
 
 <div class="method"><a name="registerGet"></a>
 
+### Register
 <div class="method-path"><a name="registerGet"></a>
 
     get /register
@@ -123,6 +126,8 @@
 
 <div class="method"><a name="safebuyGet"></a>
 
+### Safe Buy
+ 
 <div class="method-path"><a name="safebuyGet"></a>
 
     get /safebuy
@@ -167,6 +172,7 @@
 
 <div class="method"><a name="loadPersonasGet"></a>
 
+### Load Personas
 <div class="method-path"><a name="loadPersonasGet"></a>
 
     get /loadpersonas
@@ -236,6 +242,7 @@
 
 <div class="method"><a name="loadCategoriasGet"></a>
 
+### Load Categories
 <div class="method-path"><a name="loadCategoriasGet"></a>
 
     get /loadcategories
@@ -320,6 +327,7 @@
 
 <div class="method"><a name="personaGet"></a>
 
+### Persona
 <div class="method-path"><a name="personaGet"></a>
 
     get /persona
@@ -361,6 +369,7 @@
 
 <div class="method"><a name="balanceGet"></a>
 
+### Balance
 <div class="method-path"><a name="balanceGet"></a>
 
     get /balance
