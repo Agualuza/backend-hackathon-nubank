@@ -14,6 +14,7 @@
 *   https://nubank-gamefy.herokuapp.com/safebuy
 *   https://nubank-gamefy.herokuapp.com/loadpersonas
 *   https://nubank-gamefy.herokuapp.com/loadcategories
+*   https://nubank-gamefy.herokuapp.com/loadquestions
 *   https://nubank-gamefy.herokuapp.com/persona
 *   https://nubank-gamefy.herokuapp.com/balance
 
@@ -318,6 +319,40 @@
                 "name": "Remédio",
                 "type": "P"
             }
+        ]
+    ],
+    "message": "Success"
+}
+* * *
+
+<div class="method"><a name="loadQuestionsGet"></a>
+
+### Load Questions
+<div class="method-path"><a name="loadQuestionsGet"></a>
+
+    get /loadquestions
+
+</div>
+
+<div class="method-summary">Load all form questions. (<span class="nickname">loadQuestionsGet</span>)</div>
+
+### Query parameters
+
+    no parameters
+
+### Example data
+
+<div class="example-data-content-type">Content-Type: application/json</div>
+   
+    {
+    "status": "OK",
+    "response": [
+        [
+            "Atualmente você possui alguma reserva financeira para uma aplicação de maior risco e maior retorno?",
+            "Atualmente você possui alguma reserva de segurança que te garanta ao menos três meses sem renda?",
+            "Você conseguiu no mês atual pagar todos os boletos em dia?",
+            "Nos últimos três meses aconteceu de você gastar mais que a sua renda?",
+            "Nos últimos três meses você precisou utilizar crédito para pagar boletos ou dívidas? Ou deixou e pagar alguma dessas dívidas?"
         ]
     ],
     "message": "Success"
