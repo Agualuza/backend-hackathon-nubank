@@ -7,4 +7,6 @@ type Persona struct {
 	Goal        string  `json:"goal"`
 	Photo       string  `json:"photo"`
 	Factor      float64 `json:"factor"`
+	Payment     float64 `json:"payment"`
+	Bill        float64 `json:"bill"`
 }

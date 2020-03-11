@@ -12,26 +12,45 @@ func Persona(c echo.Context) error {
 	db := database.ConnectDB()
 	var id,count int
 	var name,description,goal,photo string
+	var payment,bill float64
 
 	currentUser := getUserByToken(c.FormValue("token"))
 
-	_ = db.QueryRow("SELECT count(1),id,name,description,goal,photo FROM persona WHERE q1 = ? and q2 = ? and q3 = ? and q4 = ? and q5 = ?",c.FormValue("q1"),c.FormValue("q2"),c.FormValue("q3"),c.FormValue("q4"),c.FormValue("q5")).Scan(&count,&id,&name,&description,&goal,&photo)
+	_ = db.QueryRow("SELECT count(1),id,name,description,goal,payment,bill,photo FROM persona WHERE q1 = ? and q2 = ? and q3 = ? and q4 = ? and q5 = ?",c.FormValue("q1"),c.FormValue("q2"),c.FormValue("q3"),c.FormValue("q4"),c.FormValue("q5")).Scan(&count,&id,&name,&description,&goal,&payment,&bill,&photo)
+
+	rows , _ := db.Query("SELECT id,name,description,goal,payment,bill,photo FROM persona WHERE id = ? or id = ?",id-1,id+1)
+	defer rows.Close()
 
 	var response jsonReponse
-	var persona model.Persona
-
-	persona.Id = id
-	persona.Name = name
-	persona.Description = description
-	persona.Goal = goal
-	persona.Photo = photo
+	var persona []model.Persona
+	var mainPid int
 
 	if count == 0 {
-		p := returnEstimatedPersona(c.FormValue("q1"),c.FormValue("q2"),c.FormValue("q4"),c.FormValue("q5"))
+		p,pid := returnEstimatedPersona(c.FormValue("q1"),c.FormValue("q2"),c.FormValue("q4"),c.FormValue("q5"))
 		persona = p
+		mainPid = pid
+	} else {
+		var p model.Persona
+		p.Id = id
+		p.Name = name
+		p.Description = description
+		p.Goal = goal
+		p.Payment = payment
+		p.Bill = bill
+		p.Photo = photo
+		mainPid = id
+
+		persona = append(persona,p)
+
+		for rows.Next() {
+			var pAux model.Persona
+			rows.Scan(&pAux.Id,&pAux.Name,&pAux.Description,&pAux.Goal,&pAux.Payment,&pAux.Bill,&pAux.Photo)
+			persona = append(persona,pAux)
+		}
 	}
 
-	savePersonaHistoric(currentUser.Id,persona.Id,c.FormValue("q1"),c.FormValue("q2"),c.FormValue("q3"),c.FormValue("q4"),c.FormValue("q5"))
+	savePersonaHistoric(currentUser.Id,mainPid,c.FormValue("q1"),c.FormValue("q2"),c.FormValue("q3"),c.FormValue("q4"),c.FormValue("q5"))
+
 
 
 	response.Message = MessageSuccess
@@ -48,8 +67,8 @@ func savePersonaHistoric(uid,pid int ,q1,q2,q3,q4,q5 string) {
 	defer db.Close()
 }
 
-func returnEstimatedPersona(q1,q2,q4,q5 string) model.Persona {
-	var p model.Persona
+func returnEstimatedPersona(q1,q2,q4,q5 string) ([]model.Persona,int) {
+	var list []model.Persona
 	var sum,pid int
 	db := database.ConnectDB()
 
@@ -69,21 +88,45 @@ func returnEstimatedPersona(q1,q2,q4,q5 string) model.Persona {
 	}
 
 	var name,description,goal,photo string
-	var factor float64
+	var factor,payment,bill float64
+	var id,count int
 
-	_ = db.QueryRow("SELECT name,description,goal,factor,photo from  persona where id = ?",pid).Scan(&name,&description,&goal,&factor,&photo)
+	_ = db.QueryRow("SELECT count(1) FROM persona").Scan(&count)
 
-	p.Id = pid
-	p.Photo = photo
-	p.Goal = goal
-	p.Name = name
-	p.Description = description
-	p.Factor = factor
+	id0,id1,id2 := getIdsList(pid,count)
+
+	rows , _ := db.Query("SELECT id,name,description,goal,factor,payment,bill,photo FROM  persona WHERE id IN (?,?,?) ORDER BY id != ?",id0,id1,id2,id0)
+
+	defer rows.Close()
+
+	for rows.Next() {
+		var p model.Persona
+		rows.Scan(&id,&name,&description,&goal,&factor,&payment,&bill,&photo)
+		p.Id = id
+		p.Photo = photo
+		p.Goal = goal
+		p.Name = name
+		p.Description = description
+		p.Factor = factor
+		p.Payment = payment
+		p.Bill = bill
+		list = append(list,p)
+	}
 
 	defer db.Close()
-	return p
+	return list,pid
 
 
+}
+
+func getIdsList(pid,count int) (int,int,int) {
+	if pid > 1 && pid < count{
+		return pid,pid-1,pid+1
+	} else if pid == 0 {
+		return pid,pid+1,0
+	} else {
+		return pid,pid-1,0
+	}
 }
 
 func sumTwoAnswers(q1,q2 int) int {
