@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"math"
 )
 
 func SafeBuy(c echo.Context) error {
