@@ -64,7 +64,9 @@ func analyze(p model.Persona, c model.Category, u model.User, price float64) Eva
 	var response float64
 
 	balance := (p.Payment * SafeBuyVariablePercentage) - p.Bill
-
+	
+	balance = math.Max(balance,400.00)
+	
 	response = (balance / price) * p.Factor
 	eval := calculateEvaluation(response)
 	bestEvalAllowed := getBestEvalAllowed(eval, c, p)
