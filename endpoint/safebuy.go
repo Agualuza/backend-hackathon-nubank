@@ -4,11 +4,11 @@ import (
 	"bank/database"
 	"bank/model"
 	"github.com/labstack/echo"
+	"math"
 	"net/http"
 	"strconv"
 	"strings"
 	"time"
-	"math"
 )
 
 func SafeBuy(c echo.Context) error {
@@ -16,6 +16,8 @@ func SafeBuy(c echo.Context) error {
 		var response jsonReponse
 		response.Status = StatusNok
 		response.Message = "persona_id is required"
+		c.Response().Header().Set("Access-Control-Allow-Origin","*")
+		c.Response().WriteHeader(http.StatusBadRequest)
 		return c.JSON(http.StatusBadRequest, response)
 	}
 
@@ -23,6 +25,8 @@ func SafeBuy(c echo.Context) error {
 		var response jsonReponse
 		response.Status = StatusNok
 		response.Message = "product_price is required"
+		c.Response().Header().Set("Access-Control-Allow-Origin","*")
+		c.Response().WriteHeader(http.StatusBadRequest)
 		return c.JSON(http.StatusBadRequest, response)
 	}
 
@@ -30,6 +34,8 @@ func SafeBuy(c echo.Context) error {
 		var response jsonReponse
 		response.Status = StatusNok
 		response.Message = "category_id is required"
+		c.Response().Header().Set("Access-Control-Allow-Origin","*")
+		c.Response().WriteHeader(http.StatusBadRequest)
 		return c.JSON(http.StatusBadRequest, response)
 	}
 
@@ -37,6 +43,8 @@ func SafeBuy(c echo.Context) error {
 		var response jsonReponse
 		response.Status = StatusNok
 		response.Message = "token is required"
+		c.Response().Header().Set("Access-Control-Allow-Origin","*")
+		c.Response().WriteHeader(http.StatusBadRequest)
 		return c.JSON(http.StatusBadRequest, response)
 	}
 
@@ -56,6 +64,8 @@ func SafeBuy(c echo.Context) error {
 	response.Status = StatusOk
 	response.Message = MessageSuccess
 	response.Response = append(response.Response, riskEvaluate)
+	c.Response().Header().Set("Access-Control-Allow-Origin","*")
+	c.Response().WriteHeader(http.StatusOK)
 	return c.JSON(http.StatusOK, response)
 
 }

@@ -21,6 +21,8 @@ func Login(c echo.Context) error {
 			response.Message = "Token invalid"
 		}
 
+		c.Response().Header().Set("Access-Control-Allow-Origin","*")
+		c.Response().WriteHeader(http.StatusOK)
 		return c.JSON(http.StatusOK, response)
 	}
 

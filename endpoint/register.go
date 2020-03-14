@@ -41,6 +41,8 @@ func Register(c echo.Context) error {
 	response.Response = emptySlice
 	response.Message = "You are already registered"
 
+	c.Response().Header().Set("Access-Control-Allow-Origin","*")
+	c.Response().WriteHeader(http.StatusOK)
 	return c.JSON(http.StatusOK, response)
 }
 

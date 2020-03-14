@@ -58,6 +58,9 @@ func Persona(c echo.Context) error {
 	response.Response = append(response.Response, persona)
 
 	defer db.Close()
+
+	c.Response().Header().Set("Access-Control-Allow-Origin","*")
+	c.Response().WriteHeader(http.StatusOK)
 	return c.JSON(http.StatusOK, response)
 }
 
