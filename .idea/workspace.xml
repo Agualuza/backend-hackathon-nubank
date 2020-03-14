@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4ed9429c-ce9e-440e-b8c5-3b39c02f3c5e" name="Default Changelist" comment="" />
+    <list default="true" id="4ed9429c-ce9e-440e-b8c5-3b39c02f3c5e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/vendor.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/vendor.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,6 +69,10 @@
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state x="218" y="76" key="SettingsEditor/0.23.1440.829@0.23.1440.829" timestamp="1583267818981" />
+    <state x="386" y="72" width="667" height="729" key="find.popup" timestamp="1584153202683">
+      <screen x="0" y="23" width="1440" height="832" />
+    </state>
+    <state x="386" y="72" width="667" height="729" key="find.popup/0.23.1440.832@0.23.1440.832" timestamp="1584153202683" />
     <state x="493" y="52" key="refactoring.ChangeSignatureDialog" timestamp="1583263655158">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
