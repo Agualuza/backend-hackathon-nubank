@@ -25,12 +25,6 @@
 			"revisionTime": "2018-08-30T19:11:22Z"
 		},
 		{
-			"checksumSHA1": "P+YWoacSinuPgrm9YhNLi83f75M=",
-			"path": "github.com/dgrijalva/jwt-go",
-			"revision": "dc14462fd58732591c7fa58cc8496d6824316a82",
-			"revisionTime": "2020-01-07T01:32:13Z"
-		},
-		{
 			"checksumSHA1": "WDcVWDtHun6YjZ5ImyORwp2qGxY=",
 			"path": "github.com/ghodss/yaml",
 			"revision": "25d852aebe32c875e9c044af3eef9c7dc6bc777f",
@@ -49,24 +43,8 @@
 			"revisionTime": "2020-02-29T15:49:22Z"
 		},
 		{
-			"checksumSHA1": "abyC+1JG2hrdCLf7A1cBThHMYlQ=",
-			"path": "github.com/labstack/echo/middleware",
-			"revision": "fc4b1c0a830f194bf6334d2b3e61d92cccebb2be",
-			"revisionTime": "2020-03-05T14:36:43Z"
-		},
-		{
-			"path": "github.com/labstack/echo/v4",
-			"revision": "3e8a797db0fed880ba5399b6e0eb2e49185d40ee"
-		},
-		{
 			"checksumSHA1": "GwBKs7+QOCxvdNba+MqJrcEqtlg=",
 			"path": "github.com/labstack/gommon",
-			"revision": "4919956f6fb227b548f004da27c7c6b20fba499f",
-			"revisionTime": "2019-08-17T14:29:43Z"
-		},
-		{
-			"checksumSHA1": "rN+p4nPdKiIwqMSvdOiNW0hscuA=",
-			"path": "github.com/labstack/gommon/bytes",
 			"revision": "4919956f6fb227b548f004da27c7c6b20fba499f",
 			"revisionTime": "2019-08-17T14:29:43Z"
 		},
@@ -79,12 +57,6 @@
 		{
 			"checksumSHA1": "NRXvF1Wn6fF9wcPOOv9MNSdDRaE=",
 			"path": "github.com/labstack/gommon/log",
-			"revision": "4919956f6fb227b548f004da27c7c6b20fba499f",
-			"revisionTime": "2019-08-17T14:29:43Z"
-		},
-		{
-			"checksumSHA1": "iPlSnDjuur4cK1G/7mJM/7frIm4=",
-			"path": "github.com/labstack/gommon/random",
 			"revision": "4919956f6fb227b548f004da27c7c6b20fba499f",
 			"revisionTime": "2019-08-17T14:29:43Z"
 		},

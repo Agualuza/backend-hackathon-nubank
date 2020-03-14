@@ -3,7 +3,6 @@ package main
 import (
 	"bank/conf"
 	"bank/endpoint"
-	"github.com/labstack/echo/middleware"
 	"os"
 
 	"github.com/labstack/echo"
@@ -23,7 +22,6 @@ func init() {
 //main contains all API endpoints
 func main() {
 	e := echo.New()
-	e.Use(middleware.CORS())
 
 	//Login
 	e.GET("/login", endpoint.Login)
