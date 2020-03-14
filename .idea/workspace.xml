@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4ed9429c-ce9e-440e-b8c5-3b39c02f3c5e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conf/conf.json" beforeDir="false" afterPath="$PROJECT_DIR$/conf/conf.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/database/db.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/endpoint/const.go" beforeDir="false" afterPath="$PROJECT_DIR$/endpoint/const.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/endpoint/loadpersonas.go" beforeDir="false" afterPath="$PROJECT_DIR$/endpoint/loadpersonas.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/endpoint/persona.go" beforeDir="false" afterPath="$PROJECT_DIR$/endpoint/persona.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/endpoint/safebuy.go" beforeDir="false" afterPath="$PROJECT_DIR$/endpoint/safebuy.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/persona.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/persona.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
