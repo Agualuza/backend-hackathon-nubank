@@ -55,6 +55,10 @@
 			"revisionTime": "2020-03-05T14:36:43Z"
 		},
 		{
+			"path": "github.com/labstack/echo/v4",
+			"revision": "3e8a797db0fed880ba5399b6e0eb2e49185d40ee"
+		},
+		{
 			"checksumSHA1": "GwBKs7+QOCxvdNba+MqJrcEqtlg=",
 			"path": "github.com/labstack/gommon",
 			"revision": "4919956f6fb227b548f004da27c7c6b20fba499f",
