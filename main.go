@@ -3,10 +3,10 @@ package main
 import (
 	"bank/conf"
 	"bank/endpoint"
-	"os"
-
 	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 	"github.com/tkanos/gonfig"
+	"os"
 )
 
 var configuration = conf.Configuration{}
@@ -22,6 +22,7 @@ func init() {
 //main contains all API endpoints
 func main() {
 	e := echo.New()
+	e.Use(middleware.CORS())
 
 	//Login
 	e.GET("/login", endpoint.Login)
