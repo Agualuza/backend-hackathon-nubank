@@ -3,6 +3,7 @@ package endpoint
 import (
 	"bank/database"
 	"bank/model"
+	"encoding/json"
 	"github.com/labstack/echo"
 	"golang.org/x/crypto/bcrypt"
 	"net/http"
@@ -22,9 +23,9 @@ func Login(c echo.Context) error {
 		}
 
 		c.Response().Header().Set("Access-Control-Allow-Origin","*")
-		c.Response().Header().Set("Content-Type","application/json; charset=utf-8")
-		c.Response().WriteHeader(http.StatusOK)
-		return c.JSON(http.StatusOK, response)
+		c.Response().Header().Set(echo.HeaderContentType,echo.MIMEApplicationJSONCharsetUTF8)
+		c.Response().WriteHeader(http.StatusBadRequest)
+		return json.NewEncoder(c.Response()).Encode(response)
 	}
 
 	currentUser, exists := getCurrentUser(c.FormValue("email"), c.FormValue("password"))
@@ -42,7 +43,10 @@ func Login(c echo.Context) error {
 	response.Response = append(response.Response, currentUser)
 	response.Message = message
 
-	return c.JSON(http.StatusOK, response)
+	c.Response().Header().Set("Access-Control-Allow-Origin","*")
+	c.Response().Header().Set(echo.HeaderContentType,echo.MIMEApplicationJSONCharsetUTF8)
+	c.Response().WriteHeader(http.StatusBadRequest)
+	return json.NewEncoder(c.Response()).Encode(response)
 
 }
 

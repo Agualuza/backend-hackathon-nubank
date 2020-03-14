@@ -2,6 +2,7 @@ package endpoint
 
 import (
 	"bank/database"
+	"encoding/json"
 	"github.com/cheekybits/genny/generic"
 	"github.com/labstack/echo"
 	"golang.org/x/crypto/bcrypt"
@@ -42,9 +43,9 @@ func Register(c echo.Context) error {
 	response.Message = "You are already registered"
 
 	c.Response().Header().Set("Access-Control-Allow-Origin","*")
-	c.Response().Header().Set("Content-Type","application/json; charset=utf-8")
-	c.Response().WriteHeader(http.StatusOK)
-	return c.JSON(http.StatusOK, response)
+	c.Response().Header().Set(echo.HeaderContentType,echo.MIMEApplicationJSONCharsetUTF8)
+	c.Response().WriteHeader(http.StatusBadRequest)
+	return json.NewEncoder(c.Response()).Encode(response)
 }
 
 func verify(email string) bool {

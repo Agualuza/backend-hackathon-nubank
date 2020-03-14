@@ -3,6 +3,7 @@ package endpoint
 import (
 	"bank/database"
 	"bank/model"
+	"encoding/json"
 	"github.com/labstack/echo"
 	"math"
 	"net/http"
@@ -44,9 +45,9 @@ func SafeBuy(c echo.Context) error {
 		response.Status = StatusNok
 		response.Message = "token is required"
 		c.Response().Header().Set("Access-Control-Allow-Origin","*")
-		c.Response().Header().Set("Content-Type","application/json; charset=utf-8")
+		c.Response().Header().Set(echo.HeaderContentType,echo.MIMEApplicationJSONCharsetUTF8)
 		c.Response().WriteHeader(http.StatusBadRequest)
-		return c.JSON(http.StatusBadRequest, response)
+		return json.NewEncoder(c.Response()).Encode(response)
 	}
 
 	currentUser := getUserByToken(c.FormValue("token"))

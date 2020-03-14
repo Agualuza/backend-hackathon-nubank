@@ -3,6 +3,7 @@ package endpoint
 import (
 	"bank/database"
 	"bank/model"
+	"encoding/json"
 	"github.com/labstack/echo"
 	"net/http"
 )
@@ -16,9 +17,9 @@ func LoadCategories(c echo.Context) error {
 	response.Response = append(response.Response, getAllCategories())
 
 	c.Response().Header().Set("Access-Control-Allow-Origin","*")
-	c.Response().Header().Set("Content-Type","application/json; charset=utf-8")
-	c.Response().WriteHeader(http.StatusOK)
-	return c.JSON(http.StatusOK, response)
+	c.Response().Header().Set(echo.HeaderContentType,echo.MIMEApplicationJSONCharsetUTF8)
+	c.Response().WriteHeader(http.StatusBadRequest)
+	return json.NewEncoder(c.Response()).Encode(response)
 }
 
 func getAllCategories() []model.Category{
