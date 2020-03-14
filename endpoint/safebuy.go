@@ -18,8 +18,9 @@ func SafeBuy(c echo.Context) error {
 		response.Status = StatusNok
 		response.Message = "persona_id is required"
 		c.Response().Header().Set("Access-Control-Allow-Origin","*")
+		c.Response().Header().Set(echo.HeaderContentType,echo.MIMEApplicationJSONCharsetUTF8)
 		c.Response().WriteHeader(http.StatusBadRequest)
-		return c.JSON(http.StatusBadRequest, response)
+		return json.NewEncoder(c.Response()).Encode(response)
 	}
 
 	if len(c.FormValue("product_price")) == 0 {
@@ -27,8 +28,9 @@ func SafeBuy(c echo.Context) error {
 		response.Status = StatusNok
 		response.Message = "product_price is required"
 		c.Response().Header().Set("Access-Control-Allow-Origin","*")
+		c.Response().Header().Set(echo.HeaderContentType,echo.MIMEApplicationJSONCharsetUTF8)
 		c.Response().WriteHeader(http.StatusBadRequest)
-		return c.JSON(http.StatusBadRequest, response)
+		return json.NewEncoder(c.Response()).Encode(response)
 	}
 
 	if len(c.FormValue("category_id")) == 0 {
@@ -36,8 +38,9 @@ func SafeBuy(c echo.Context) error {
 		response.Status = StatusNok
 		response.Message = "category_id is required"
 		c.Response().Header().Set("Access-Control-Allow-Origin","*")
+		c.Response().Header().Set(echo.HeaderContentType,echo.MIMEApplicationJSONCharsetUTF8)
 		c.Response().WriteHeader(http.StatusBadRequest)
-		return c.JSON(http.StatusBadRequest, response)
+		return json.NewEncoder(c.Response()).Encode(response)
 	}
 
 	if len(c.FormValue("token")) == 0 {
@@ -67,8 +70,9 @@ func SafeBuy(c echo.Context) error {
 	response.Message = MessageSuccess
 	response.Response = append(response.Response, riskEvaluate)
 	c.Response().Header().Set("Access-Control-Allow-Origin","*")
-	c.Response().WriteHeader(http.StatusOK)
-	return c.JSON(http.StatusOK, response)
+	c.Response().Header().Set(echo.HeaderContentType,echo.MIMEApplicationJSONCharsetUTF8)
+	c.Response().WriteHeader(http.StatusBadRequest)
+	return json.NewEncoder(c.Response()).Encode(response)
 
 }
 
