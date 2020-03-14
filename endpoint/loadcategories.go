@@ -15,6 +15,8 @@ func LoadCategories(c echo.Context) error {
 	response.Status = StatusOk
 	response.Response = append(response.Response, getAllCategories())
 
+	c.Response().Header().Set("Access-Control-Allow-Origin","*")
+	c.Response().WriteHeader(http.StatusOK)
 	return c.JSON(http.StatusOK, response)
 }
 
