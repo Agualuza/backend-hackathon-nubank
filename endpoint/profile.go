@@ -14,5 +14,10 @@ type Evaluation struct {
 
 type RiskEvaluate struct {
 	Evaluation Evaluation `json:"evaluation"`
-	Blog model.Blog `json:"blog"`
+	Blog       model.Blog `json:"blog"`
+}
+
+type IAResponse struct {
+	Response string `json:"response"`
+	Status   string `json:"status"`
 }

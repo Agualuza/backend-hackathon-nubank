@@ -4,13 +4,16 @@ import (
 	"bank/database"
 	"bank/model"
 	"encoding/json"
+	"fmt"
 	"github.com/labstack/echo"
+	"io/ioutil"
 	"math"
 	"net/http"
 	"strconv"
 	"strings"
 	"time"
 )
+
 
 func SafeBuy(c echo.Context) error {
 	if len(c.FormValue("persona_id")) == 0 {
@@ -75,6 +78,86 @@ func SafeBuy(c echo.Context) error {
 	return json.NewEncoder(c.Response()).Encode(response)
 
 }
+
+func SafeBuyWithIA(c echo.Context) error {
+	if len(c.FormValue("persona_id")) == 0 {
+		var response jsonReponse
+		response.Status = StatusNok
+		response.Message = "persona_id is required"
+		c.Response().Header().Set("Access-Control-Allow-Origin","*")
+		c.Response().Header().Set(echo.HeaderContentType,echo.MIMEApplicationJSONCharsetUTF8)
+		c.Response().WriteHeader(http.StatusBadRequest)
+		return json.NewEncoder(c.Response()).Encode(response)
+	}
+
+	if len(c.FormValue("product_price")) == 0 {
+		var response jsonReponse
+		response.Status = StatusNok
+		response.Message = "product_price is required"
+		c.Response().Header().Set("Access-Control-Allow-Origin","*")
+		c.Response().Header().Set(echo.HeaderContentType,echo.MIMEApplicationJSONCharsetUTF8)
+		c.Response().WriteHeader(http.StatusBadRequest)
+		return json.NewEncoder(c.Response()).Encode(response)
+	}
+
+	if len(c.FormValue("category_id")) == 0 {
+		var response jsonReponse
+		response.Status = StatusNok
+		response.Message = "category_id is required"
+		c.Response().Header().Set("Access-Control-Allow-Origin","*")
+		c.Response().Header().Set(echo.HeaderContentType,echo.MIMEApplicationJSONCharsetUTF8)
+		c.Response().WriteHeader(http.StatusBadRequest)
+		return json.NewEncoder(c.Response()).Encode(response)
+	}
+
+	//currentUser := getUserByToken(c.FormValue("token"))
+	persona := getPersona(c.FormValue("persona_id"))
+	category := getCategory(c.FormValue("category_id"))
+	productPrice, _ := strconv.ParseFloat(c.FormValue("product_price"), 64)
+	var response jsonReponse
+
+	var url string
+	pid := "?persona_id=" + fmt.Sprintf("%d", persona.Id)
+	cid := "&category_id=" + fmt.Sprintf("%d", category.Id)
+	payment := "&payment=" + fmt.Sprintf("%.2f", persona.Payment)
+	bill := "&bill=" + fmt.Sprintf("%.2f", persona.Bill)
+	pp := "&product_price=" + fmt.Sprintf("%.2f", productPrice)
+	url = "https://risk-analyzer-bank.herokuapp.com/" + pid + cid + payment + bill + pp
+
+	resp, err := http.Get(url)
+	defer resp.Body.Close()
+
+	if err != nil {
+		response.Status = StatusNok
+		response.Message = err.Error()
+	}
+
+	body, err := ioutil.ReadAll(resp.Body)
+
+
+	if err != nil {
+		response.Status = StatusNok
+		response.Message = err.Error()
+	}
+
+	var IAResponse IAResponse
+	json.Unmarshal(body, &IAResponse)
+
+	evaluations := loadEvaluations()
+
+	var r RiskEvaluate
+	r.Evaluation = evaluations[IAResponse.Response]
+	r.Blog = getBlogPost(persona.Id,IAResponse.Response)
+
+	response.Status = StatusOk
+	response.Message = MessageSuccess
+	response.Response = append(response.Response, r)
+	c.Response().Header().Set("Access-Control-Allow-Origin","*")
+	c.Response().Header().Set(echo.HeaderContentType,echo.MIMEApplicationJSONCharsetUTF8)
+	c.Response().WriteHeader(http.StatusOK)
+	return json.NewEncoder(c.Response()).Encode(response)
+}
+
 
 func analyze(p model.Persona, c model.Category, u model.User, price float64) Evaluation {
 	evaluations := loadEvaluations()

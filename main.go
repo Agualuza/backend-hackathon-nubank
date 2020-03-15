@@ -45,7 +45,7 @@ func main() {
 	e.GET("/loadcategories", endpoint.LoadCategories)
 
 	//SafeBuy
-	e.GET("/safebuy", endpoint.SafeBuy)
+	e.GET("/safebuy", endpoint.SafeBuyWithIA)
 	
 	//LoadQuestions
 	e.GET("/loadquestions", endpoint.LoadQuestions)
