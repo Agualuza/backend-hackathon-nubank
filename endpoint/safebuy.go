@@ -110,7 +110,7 @@ func SafeBuyWithIA(c echo.Context) error {
 		return json.NewEncoder(c.Response()).Encode(response)
 	}
 
-	//currentUser := getUserByToken(c.FormValue("token"))
+	currentUser := getUserByToken(c.FormValue("token"))
 	persona := getPersona(c.FormValue("persona_id"))
 	category := getCategory(c.FormValue("category_id"))
 	productPrice, _ := strconv.ParseFloat(c.FormValue("product_price"), 64)
@@ -144,6 +144,8 @@ func SafeBuyWithIA(c echo.Context) error {
 	json.Unmarshal(body, &IAResponse)
 
 	evaluations := loadEvaluations()
+
+	saveAnalytics(currentUser, productPrice, persona.Payment, IAResponse.Response)
 
 	var r RiskEvaluate
 	r.Evaluation = evaluations[IAResponse.Response]
