@@ -122,7 +122,7 @@ func SafeBuyWithIA(c echo.Context) error {
 	payment := "&payment=" + fmt.Sprintf("%.2f", persona.Payment)
 	bill := "&bill=" + fmt.Sprintf("%.2f", persona.Bill)
 	pp := "&product_price=" + fmt.Sprintf("%.2f", productPrice)
-	url = "https://risk-analyzer-bank.herokuapp.com/" + pid + cid + payment + bill + pp
+	url = "https://risk-analyzer-bank.herokuapp.com/lregression" + pid + cid + payment + bill + pp
 
 	resp, err := http.Get(url)
 	defer resp.Body.Close()
