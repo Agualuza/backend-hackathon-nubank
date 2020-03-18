@@ -46,7 +46,7 @@ func Persona(c echo.Context) error {
 
 		for rows.Next() {
 			var pAux model.Persona
-			rows.Scan(&pAux.Id,&pAux.Name,&p.Title,&pAux.Description,&pAux.Goal,&pAux.Payment,&pAux.Bill,&pAux.Photo)
+			rows.Scan(&pAux.Id,&pAux.Name,&pAux.Title,&pAux.Description,&pAux.Goal,&pAux.Payment,&pAux.Bill,&pAux.Photo)
 			persona = append(persona,pAux)
 		}
 	}
