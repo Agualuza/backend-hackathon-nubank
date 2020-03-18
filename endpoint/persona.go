@@ -12,14 +12,14 @@ import (
 func Persona(c echo.Context) error {
 	db := database.ConnectDB()
 	var id,count int
-	var name,description,goal,photo string
+	var name,title,description,goal,photo string
 	var payment,bill float64
 
 	currentUser := getUserByToken(c.FormValue("token"))
 
-	_ = db.QueryRow("SELECT count(1),id,name,description,goal,payment,bill,photo FROM persona WHERE q1 = ? and q2 = ? and q3 = ? and q4 = ? and q5 = ?",c.FormValue("q1"),c.FormValue("q2"),c.FormValue("q3"),c.FormValue("q4"),c.FormValue("q5")).Scan(&count,&id,&name,&description,&goal,&payment,&bill,&photo)
+	_ = db.QueryRow("SELECT count(1),id,name,title,description,goal,payment,bill,photo FROM persona WHERE q1 = ? and q2 = ? and q3 = ? and q4 = ? and q5 = ?",c.FormValue("q1"),c.FormValue("q2"),c.FormValue("q3"),c.FormValue("q4"),c.FormValue("q5")).Scan(&count,&id,&name,&title,&description,&goal,&payment,&bill,&photo)
 
-	rows , _ := db.Query("SELECT id,name,description,goal,payment,bill,photo FROM persona WHERE id = ? or id = ?",id-1,id+1)
+	rows , _ := db.Query("SELECT id,name,title,description,goal,payment,bill,photo FROM persona WHERE id = ? or id = ?",id-1,id+1)
 	defer rows.Close()
 
 	var response jsonReponse
@@ -39,13 +39,14 @@ func Persona(c echo.Context) error {
 		p.Payment = payment
 		p.Bill = bill
 		p.Photo = photo
+		p.Title = title
 		mainPid = id
 
 		persona = append(persona,p)
 
 		for rows.Next() {
 			var pAux model.Persona
-			rows.Scan(&pAux.Id,&pAux.Name,&pAux.Description,&pAux.Goal,&pAux.Payment,&pAux.Bill,&pAux.Photo)
+			rows.Scan(&pAux.Id,&pAux.Name,&p.Title,&pAux.Description,&pAux.Goal,&pAux.Payment,&pAux.Bill,&pAux.Photo)
 			persona = append(persona,pAux)
 		}
 	}
@@ -92,7 +93,7 @@ func returnEstimatedPersona(q1,q2,q4,q5 string) ([]model.Persona,int) {
 		pid = 3
 	}
 
-	var name,description,goal,photo string
+	var name,title,description,goal,photo string
 	var factor,payment,bill float64
 	var id,count int
 
@@ -100,13 +101,13 @@ func returnEstimatedPersona(q1,q2,q4,q5 string) ([]model.Persona,int) {
 
 	id0,id1,id2 := getIdsList(pid,count)
 
-	rows , _ := db.Query("SELECT id,name,description,goal,factor,payment,bill,photo FROM  persona WHERE id IN (?,?,?) ORDER BY id != ?",id0,id1,id2,id0)
+	rows , _ := db.Query("SELECT id,name,title,description,goal,factor,payment,bill,photo FROM  persona WHERE id IN (?,?,?) ORDER BY id != ?",id0,id1,id2,id0)
 
 	defer rows.Close()
 
 	for rows.Next() {
 		var p model.Persona
-		rows.Scan(&id,&name,&description,&goal,&factor,&payment,&bill,&photo)
+		rows.Scan(&id,&name,&title,&description,&goal,&factor,&payment,&bill,&photo)
 		p.Id = id
 		p.Photo = photo
 		p.Goal = goal
@@ -115,6 +116,7 @@ func returnEstimatedPersona(q1,q2,q4,q5 string) ([]model.Persona,int) {
 		p.Factor = factor
 		p.Payment = payment
 		p.Bill = bill
+		p.Title = title
 		list = append(list,p)
 	}
 

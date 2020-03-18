@@ -24,14 +24,14 @@ func LoadPersonas(c echo.Context) error {
 
 func getAllPersonas() []model.Persona{
 	db := database.ConnectDB()
-	rows, _ := db.Query("SELECT id, name, description,goal,factor,payment,bill,photo from persona")
+	rows, _ := db.Query("SELECT id, name,title, description,goal,factor,payment,bill,photo from persona")
 	var id int
-	var name,description,goal,photo string
+	var name,title,description,goal,photo string
 	var factor,payment,bill float64
 	var list []model.Persona
 
 	for rows.Next() {
-		rows.Scan(&id, &name, &description, &goal,&factor,&payment,&bill,&photo);
+		rows.Scan(&id, &name, &title, &description, &goal,&factor,&payment,&bill,&photo);
 			var p model.Persona
 			p.Id = id
 			p.Name = name
@@ -41,6 +41,7 @@ func getAllPersonas() []model.Persona{
 			p.Factor = factor
 			p.Payment = payment
 			p.Bill = bill
+			p.Title = title
 			list = append(list,p)
 	}
 
