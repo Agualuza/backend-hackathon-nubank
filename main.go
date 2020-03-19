@@ -49,6 +49,9 @@ func main() {
 	
 	//LoadQuestions
 	e.GET("/loadquestions", endpoint.LoadQuestions)
+
+	//LoadPosts
+	e.GET("/loadposts", endpoint.LoadPosts)
 	
 	e.Logger.Fatal(e.Start(":" + os.Getenv("PORT")))
 }
