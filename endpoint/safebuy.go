@@ -280,11 +280,12 @@ func getBlogPost(pid int, r string) model.Blog {
 	db := database.ConnectDB()
 	var b model.Blog
 	var t time.Time
+	var rt int
 	runes := []rune(r)
 
-	_ = db.QueryRow("SELECT b.id,b.title,b.post,b.author,b.created_at FROM blog b "+
+	_ = db.QueryRow("SELECT b.id,b.title,b.post,b.author,b.read_time,b.created_at FROM blog b "+
 		"INNER JOIN response_blog rb ON rb.blog_id = b.id "+
-		"WHERE rb.persona_id = ? AND rb.response = ?", pid, string(runes[0])).Scan(&b.Id, &b.Title, &b.Post, &b.Author, &t)
+		"WHERE rb.persona_id = ? AND rb.response = ?", pid, string(runes[0])).Scan(&b.Id, &b.Title, &b.Post, &b.Author,&rt,&t)
 
 	sDate := strings.Split(t.String(), "-")
 	sDay := strings.Split(sDate[2], " ")
@@ -295,6 +296,11 @@ func getBlogPost(pid int, r string) model.Blog {
 	date := day + "/" + month + "/" + year
 
 	b.CreatedAt = date
+
+	rtString := strconv.Itoa(rt) + " minutos"
+
+	b.ReadTime.Minutes = rt
+	b.ReadTime.Time = rtString
 
 	defer db.Close()
 	return b
