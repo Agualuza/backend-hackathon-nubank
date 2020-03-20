@@ -103,6 +103,7 @@ func getUserByToken(t string) model.User {
 		currentUser.Token = token
 	}
 
+	defer db.Close()
 	return currentUser
 
 }
