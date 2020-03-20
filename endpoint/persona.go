@@ -15,7 +15,7 @@ func Persona(c echo.Context) error {
 	var name,title,description,goal,photo string
 	var payment,bill float64
 
-	currentUser := getUserByToken(c.FormValue("token"))
+	//currentUser := getUserByToken(c.FormValue("token"))
 
 	_ = db.QueryRow("SELECT count(1),id,name,title,description,goal,payment,bill,photo FROM persona WHERE q1 = ? and q2 = ? and q3 = ? and q4 = ? and q5 = ?",c.FormValue("q1"),c.FormValue("q2"),c.FormValue("q3"),c.FormValue("q4"),c.FormValue("q5")).Scan(&count,&id,&name,&title,&description,&goal,&payment,&bill,&photo)
 
@@ -51,7 +51,7 @@ func Persona(c echo.Context) error {
 		}
 	}
 
-	savePersonaHistoric(currentUser.Id,mainPid,c.FormValue("q1"),c.FormValue("q2"),c.FormValue("q3"),c.FormValue("q4"),c.FormValue("q5"))
+	//savePersonaHistoric(currentUser.Id,mainPid,c.FormValue("q1"),c.FormValue("q2"),c.FormValue("q3"),c.FormValue("q4"),c.FormValue("q5"))
 
 
 
