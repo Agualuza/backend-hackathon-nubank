@@ -22,7 +22,9 @@ func Register(c echo.Context) error {
 
 		db := database.ConnectDB()
 
-		_, err := db.Query("INSERT INTO user (name,email,password) VALUES (?,?,?)", name, email, bcryptPass)
+		rows , err := db.Query("INSERT INTO user (name,email,password) VALUES (?,?,?)", name, email, bcryptPass)
+
+		defer rows.Close()
 
 		response.Status = StatusNok
 		response.Message = "Registration has not been possible"
