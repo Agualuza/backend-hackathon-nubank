@@ -24,12 +24,12 @@ func Persona(c echo.Context) error {
 
 	var response jsonReponse
 	var persona []model.Persona
-	var mainPid int
+	//var mainPid int
 
 	if count == 0 {
-		p,pid := returnEstimatedPersona(c.FormValue("q1"),c.FormValue("q2"),c.FormValue("q4"),c.FormValue("q5"))
+		p,_ := returnEstimatedPersona(c.FormValue("q1"),c.FormValue("q2"),c.FormValue("q4"),c.FormValue("q5"))
 		persona = p
-		mainPid = pid
+		//mainPid = pid
 	} else {
 		var p model.Persona
 		p.Id = id
@@ -40,7 +40,7 @@ func Persona(c echo.Context) error {
 		p.Bill = bill
 		p.Photo = photo
 		p.Title = title
-		mainPid = id
+		//mainPid = id
 
 		persona = append(persona,p)
 
