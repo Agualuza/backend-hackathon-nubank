@@ -24,6 +24,7 @@ func LoadQuestions(c echo.Context) error {
 func getAllQuestions() []string{
 	db := database.ConnectDB()
 	rows, _ := db.Query("SELECT question from question")
+	defer rows.Close()
 	var q string
 	var list []string
 

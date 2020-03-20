@@ -25,6 +25,7 @@ func LoadPersonas(c echo.Context) error {
 func getAllPersonas() []model.Persona{
 	db := database.ConnectDB()
 	rows, _ := db.Query("SELECT id, name,title, description,goal,factor,payment,bill,photo from persona")
+	defer rows.Close()
 	var id int
 	var name,title,description,goal,photo string
 	var factor,payment,bill float64

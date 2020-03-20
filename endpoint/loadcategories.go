@@ -25,6 +25,7 @@ func LoadCategories(c echo.Context) error {
 func getAllCategories() []model.Category{
 	db := database.ConnectDB()
 	rows, _ := db.Query("SELECT id, name, type from category")
+	defer rows.Close()
 	var id int
 	var name,t string
 	var list []model.Category

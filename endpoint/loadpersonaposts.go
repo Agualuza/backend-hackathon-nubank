@@ -42,7 +42,7 @@ func getPostsByPersonaId(pid int) []model.Blog{
 
 	rows, _ := db.Query("SELECT b.id,b.title,b.post,b.author,b.read_time,b.created_at FROM blog b INNER JOIN response_blog rb on b.id = rb.blog_id WHERE rb.persona_id = ? "+
 		"GROUP BY b.id ORDER BY b.created_at DESC",pid)
-
+	defer rows.Close()
 	for rows.Next() {
 		var b model.Blog
 		var t time.Time
