@@ -247,8 +247,9 @@ func loadEvaluations() map[string]Evaluation {
 
 func saveAnalytics(u model.User, price, payment float64, response string) {
 	db := database.ConnectDB()
-	_, err := db.Query("INSERT INTO risk_analytic (user_id,payment,product_price,response) VALUES(?,?,?,?)", u.Id, payment, price, response)
+	rows, err := db.Query("INSERT INTO risk_analytic (user_id,payment,product_price,response) VALUES(?,?,?,?)", u.Id, payment, price, response)
 
+	defer rows.Close()
 	defer db.Close()
 
 	if err != nil {

@@ -69,7 +69,8 @@ func Persona(c echo.Context) error {
 
 func savePersonaHistoric(uid,pid int ,q1,q2,q3,q4,q5 string) {
 	db := database.ConnectDB()
-	_ , _ = db.Query("INSERT INTO answer (user_id,persona_id,q1,q2,q3,q4,q5) VALUES (?,?,?,?,?,?,?)",uid,pid,q1,q2,q3,q4,q5)
+	rows , _ := db.Query("INSERT INTO answer (user_id,persona_id,q1,q2,q3,q4,q5) VALUES (?,?,?,?,?,?,?)",uid,pid,q1,q2,q3,q4,q5)
+	defer rows.Close()
 	defer db.Close()
 }
 

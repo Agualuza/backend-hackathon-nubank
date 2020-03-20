@@ -31,6 +31,7 @@ func getAllPosts() []model.Blog{
 
 	rows, _ := db.Query("SELECT id,title,post,author,read_time,created_at FROM blog "+
 		"ORDER BY created_at DESC")
+	defer rows.Close()
 
 	for rows.Next() {
 		var b model.Blog
