@@ -15,8 +15,9 @@ func MakeTransaction(c echo.Context) error {
 
 	currentUser := getUserByToken(token)
 
-	_ , err := db.Query("INSERT INTO transaction (user_id,type,amount) VALUES (?,?,?)",currentUser.Id,tp,amount)
+	rows , err := db.Query("INSERT INTO transaction (user_id,type,amount) VALUES (?,?,?)",currentUser.Id,tp,amount)
 
+	defer rows.Close()
 	var response jsonReponse
 	response.Status = StatusOk
 	response.Message = MessageSuccess
